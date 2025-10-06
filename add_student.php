@@ -1,36 +1,43 @@
 <?php include('db_connect.php'); ?>
+<?php include('header.php'); ?>
+<link rel="stylesheet" href="style.css">
 
-<h2>Add New Student</h2>
-<form method="POST" action="">
-  <label>Name:</label><br>
-  <input type="text" name="name" required><br><br>
+<div class="container">
+  <h2>Add New Student</h2>
+  <form method="POST" action="">
+    <label>Name:</label>
+    <input type="text" name="name" required>
 
-  <label>Grade:</label><br>
-  <input type="text" name="grade" required><br><br>
+    <label>Grade:</label>
+    <input type="text" name="grade" required>
 
-  <label>Email:</label><br>
-  <input type="email" name="email"><br><br>
+    <label>Email:</label>
+    <input type="email" name="email">
 
-  <label>Phone:</label><br>
-  <input type="text" name="phone"><br><br>
+    <label>Phone:</label>
+    <input type="text" name="phone">
 
-  <input type="submit" name="save" value="Save">
-</form>
+    <input type="submit" name="save" value="Save Student">
+  </form>
 
-<?php
-if (isset($_POST['save'])) {
-  $name = $_POST['name'];
-  $grade = $_POST['grade'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
+  <br>
+  <a href="view_students.php">← Back to Student List</a>
 
-  $sql = "INSERT INTO students (name, grade, email, phone)
-          VALUES ('$name', '$grade', '$email', '$phone')";
+  <?php
+  if (isset($_POST['save'])) {
+    $name = $_POST['name'];
+    $grade = $_POST['grade'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
 
-  if (mysqli_query($conn, $sql)) {
-    echo "<p>Student added successfully!</p>";
-  } else {
-    echo "Error: " . mysqli_error($conn);
+    $sql = "INSERT INTO students (name, grade, email, phone)
+            VALUES ('$name', '$grade', '$email', '$phone')";
+
+    if (mysqli_query($conn, $sql)) {
+      echo "<p style='color:green;'>✔ Student added successfully!</p>";
+    } else {
+      echo "<p style='color:red;'>Error: " . mysqli_error($conn) . "</p>";
+    }
   }
-}
-?>
+  ?>
+</div>
